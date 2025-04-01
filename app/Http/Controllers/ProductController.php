@@ -9,9 +9,12 @@ use App\Models\Category;
 
 class ProductController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(3);
         $categories = Category::all();
         return view('admin.products.index',compact('products','categories'));
     }

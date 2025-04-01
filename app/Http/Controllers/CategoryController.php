@@ -8,9 +8,12 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::paginate(4);
         return view('admin.categories.index', compact('categories'));
     }
     public function create()
